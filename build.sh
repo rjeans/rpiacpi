@@ -6,7 +6,7 @@ set -e
 FLASH_SIZE_MB=64
 TOOLCHAIN=GCC5
 ARCH=AARCH64
-FIRMWARE_NAME=RPI_EFI
+FIRMWARE_FILE=Build/RPi4/RELEASE_GCC5/FV/RPI_EFI.fd
 OUTPUT_DIR=firmware
 
 
@@ -40,10 +40,10 @@ if ! build -a "$ARCH" -t "$TOOLCHAIN" -p "$DSC" -b RELEASE ; then
 fi
 
 # Verify the firmware file exists
-if [ ! -f  Build/RPi4Poe/RELEASE_GCC5/FV/RPI_EFI.fd ]; then
+if [ ! -f  $FIRMWARE_FILE ]; then
     echo "Build failed. Firmware file not found."
     exit 1
 fi
 
-cp Build/ArmVirtQemu-AARCH64/RELEASE_GCC5/FV/QEMU_EFI.fd $OUTPUT_DIR
+cp $FIRMWARE_FILE $OUTPUT_DIR
 
