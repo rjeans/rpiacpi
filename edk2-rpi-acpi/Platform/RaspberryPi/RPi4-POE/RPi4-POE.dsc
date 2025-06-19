@@ -15,7 +15,7 @@
 #
 ################################################################################
 [Defines]
-  PLATFORM_NAME                  = RPi4
+  PLATFORM_NAME                  = RPi4-POE
   PLATFORM_GUID                  = a7eca3b4-21b0-4989-8c18-c08f3ae87837
   PLATFORM_VERSION               = 1.0
   DSC_SPECIFICATION              = 0x0001001A
@@ -37,7 +37,7 @@
   #
   # Default TF-A binary checked into edk2-non-osi.
   #
-  DEFINE TFA_BUILD_BL31 = Platform/RaspberryPi/$(PLATFORM_NAME)/TrustedFirmware/bl31.bin
+  DEFINE TFA_BUILD_BL31 = Platform/RaspberryPi/RPi4/TrustedFirmware/bl31.bin
 !else
   #
   # Usually we use the checked-in binaries, but for developers working
@@ -498,8 +498,8 @@
   #
   # Supporting > 3GB of memory.
   #
-  gRaspberryPiTokenSpaceGuid.PcdRamMoreThan3GB|L"RamMoreThan3GB"|gConfigDxeFormSetGuid|0x0|1
-  gRaspberryPiTokenSpaceGuid.PcdRamLimitTo3GB|L"RamLimitTo3GB"|gConfigDxeFormSetGuid|0x0|0
+  gRaspberryPiTokenSpaceGuid.PcdRamMoreThan3GB|L"RamMoreThan3GB"|gConfigDxeFormSetGuid|0x0|0
+  gRaspberryPiTokenSpaceGuid.PcdRamLimitTo3GB|L"RamLimitTo3GB"|gConfigDxeFormSetGuid|0x0|1
 
   #
   # Device Tree and ACPI selection.
@@ -635,6 +635,7 @@
 !else
   MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
 !endif
+  SecurityPkg/Hash2DxeCrypto/Hash2DxeCrypto.inf
   MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
   MdeModulePkg/Universal/MonotonicCounterRuntimeDxe/MonotonicCounterRuntimeDxe.inf
   MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
@@ -659,11 +660,9 @@
 
   ArmPkg/Drivers/ArmGicDxe/ArmGicV2Dxe.inf
   Platform/RaspberryPi/Drivers/RpiFirmwareDxe/RpiFirmwareDxe.inf
-  Platform/RaspberryPi/Drivers/FdtDxe/FdtDxe.inf {
-    <LibraryClasses>
-      FdtLib|EmbeddedPkg/Library/FdtLib/FdtLib.inf  # Map to deprecated library for this module only
-  }
+  Platform/RaspberryPi/Drivers/FdtDxe/FdtDxe.inf
   Platform/RaspberryPi/Drivers/ConfigDxe/ConfigDxe.inf
+  Platform/RaspberryPi/Drivers/PoeDxe/PoeDxe.inf
   ArmPkg/Drivers/TimerDxe/TimerDxe.inf
   MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
   MdeModulePkg/Universal/EbcDxe/EbcDxe.inf
@@ -682,6 +681,7 @@
   MdeModulePkg/Universal/Acpi/AcpiTableDxe/AcpiTableDxe.inf
   MdeModulePkg/Universal/Acpi/BootGraphicsResourceTableDxe/BootGraphicsResourceTableDxe.inf
   Platform/RaspberryPi/AcpiTables/AcpiTables.inf
+  Platform/RaspberryPi/PoeAcpiTables/PoeAcpiTables.inf  
 
   #
   # SMBIOS Support

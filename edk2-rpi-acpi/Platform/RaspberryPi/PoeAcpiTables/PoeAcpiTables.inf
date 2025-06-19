@@ -1,0 +1,16 @@
+
+[Defines]
+  INF_VERSION                    = 0x0001001A
+  BASE_NAME                      = PoeAcpiTables
+  FILE_GUID                      = 3A1F5B7C-9D42-4E8A-BF3E-5C7D8A9E2F1B 
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 1.0
+
+[Sources]
+  PoeFan.asl
+
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+   Silicon/Broadcom/Bcm27xx/Bcm27xx.dec

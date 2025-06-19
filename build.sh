@@ -6,19 +6,19 @@ set -e
 FLASH_SIZE_MB=64
 TOOLCHAIN=GCC5
 ARCH=AARCH64
-FIRMWARE_FILE=Build/RPi4/RELEASE_GCC5/FV/RPI_EFI.fd
+FIRMWARE_FILE=Build/RPi4-POE/RELEASE_GCC5/FV/RPI_EFI.fd
 OUTPUT_DIR=firmware
 
 
 # Define file paths
-DSC="edk2-platforms/Platform/RaspberryPi/RPi4/RPi4.dsc"
+DSC="edk2-rpi-acpi/Platform/RaspberryPi/RPi4-POE/RPi4-POE.dsc"
 
 # Create output directory
 mkdir -p "$OUTPUT_DIR"
 
 # Set environment variables for the build
 export GCC5_AARCH64_PREFIX=aarch64-linux-gnu-
-export PACKAGES_PATH="$PWD/edk2:$PWD/edk2-platforms:$PWD/edk2-non-osi"
+export PACKAGES_PATH="$PWD/edk2:$PWD/edk2-platforms:$PWD/edk2-non-osi:$PWD/edk2-rpi-acpi"
 export WORKSPACE=$PWD
 
 # Source the EDK2 build environment
