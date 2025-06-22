@@ -1,0 +1,13 @@
+index 0ca2fb3897..beb222a434 100644
+--- a/sdk_container/src/third_party/coreos-overlay/sys-kernel/coreos-modules/files/arm64_defconfig-6.6
++++ b/sdk_container/src/third_party/coreos-overlay/sys-kernel/coreos-modules/files/arm64_defconfig-6.6
+@@ -97,3 +97,9 @@ CONFIG_USB_ULPI=y
+ CONFIG_USB_XHCI_PLATFORM=y
+ CONFIG_VIRTUALIZATION=y
+ CONFIG_XGENE_DMA=y
++CONFIG_PWM=y
++CONFIG_RPI_ACPI=y
++CONFIG_RPI_MAILBOX_ACPI=m
++CONFIG_RPI_PWM_FAN_ACPI=m
++CONFIG_RPI_PWM_POE_ACPI=m
++CONFIG_RPI_ACPI_THERMAL=m
