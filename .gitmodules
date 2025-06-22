@@ -1,12 +1,16 @@
-[submodule "bootloader/edk2"]
+[submodule "firmware/edk2"]
 	path = bootloader/edk2
 	url = https://github.com/tianocore/edk2.git
 	branch = master
-[submodule "bootloader/edk2-platforms"]
+[submodule "firmware/edk2-platforms"]
 	path = bootloader/edk2-platforms
 	url = https://github.com/tianocore/edk2-platforms.git
 	branch = master
-[submodule "bootloader/edk2-non-osi"]
+[submodule "firmware/edk2-non-osi"]
 	path = bootloader/edk2-non-osi
 	url = https://github.com/tianocore/edk2-non-osi.git
 	branch = master
+[submodule "flatcar/scripts"]
+	path = flatcar/scripts
+	url = https://github.com/flatcar/scripts.git
+	branch = flatcar-4284
