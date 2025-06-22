@@ -43,15 +43,6 @@ for patch in ../"$PATCH_DIR"/*.patch; do
   fi
 done
 
-if [ $PATCHES_APPLIED -gt 0 ]; then
-  echo
-  echo "==> Committing applied patch changes..."
-  git commit -m "Apply $PATCHES_APPLIED patch(es) from ../$PATCH_DIR"
-else
-  echo
-  echo "==> No new patches applied. No commit needed."
-fi
-
 echo
 echo "==> Patch application complete."
 
