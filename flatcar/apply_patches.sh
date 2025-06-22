@@ -1,0 +1,48 @@
+#!/bin/bash
+set -euo pipefail
+
+PATCH_DIR="patches"
+SUBMODULE_DIR="scripts"
+
+# Ensure required directories exist
+if [ ! -d "$PATCH_DIR" ]; then
+  echo "ERROR: Patch directory '$PATCH_DIR' not found."
+  exit 1
+fi
+
+if [ ! -d "$SUBMODULE_DIR" ]; then
+  echo "ERROR: Submodule directory '$SUBMODULE_DIR' not found."
+  exit 1
+fi
+
+cd "$SUBMODULE_DIR"
+echo "==> Entering submodule directory: $(pwd)"
+echo "==> Checking and applying patches from ../$PATCH_DIR"
+echo
+
+# Process each patch
+for patch in ../"$PATCH_DIR"/*.patch; do
+  patchname=$(basename "$patch")
+  printf ">> Processing: %-45s ... " "$patchname"
+
+  if git apply --reverse --check "$patch" > /dev/null 2>&1; then
+    echo "SKIPPED (already applied)"
+    continue
+  fi
+
+  if git apply --check "$patch" > /dev/null 2>&1; then
+    if git apply --index "$patch" > /dev/null 2>&1; then
+      echo "APPLIED"
+    else
+      echo "FAILED during application"
+      exit 1
+    fi
+  else
+    echo "FAILED to apply (not applicable or conflict)"
+    exit 1
+  fi
+done
+
+echo
+echo "==> All patches processed successfully (applied or skipped)."
+
