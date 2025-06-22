@@ -20,7 +20,8 @@ echo "==> Entering submodule directory: $(pwd)"
 echo "==> Checking and applying patches from ../$PATCH_DIR"
 echo
 
-# Process each patch
+PATCHES_APPLIED=0
+
 for patch in ../"$PATCH_DIR"/*.patch; do
   patchname=$(basename "$patch")
   printf ">> Processing: %-45s ... " "$patchname"
@@ -28,11 +29,10 @@ for patch in ../"$PATCH_DIR"/*.patch; do
   if git apply --reverse --check "$patch" > /dev/null 2>&1; then
     echo "SKIPPED (already applied)"
     continue
-  fi
-
-  if git apply --check "$patch" > /dev/null 2>&1; then
+  elif git apply --check "$patch" > /dev/null 2>&1; then
     if git apply --index "$patch" > /dev/null 2>&1; then
       echo "APPLIED"
+      PATCHES_APPLIED=$((PATCHES_APPLIED + 1))
     else
       echo "FAILED during application"
       exit 1
@@ -43,6 +43,15 @@ for patch in ../"$PATCH_DIR"/*.patch; do
   fi
 done
 
+if [ $PATCHES_APPLIED -gt 0 ]; then
+  echo
+  echo "==> Committing applied patch changes..."
+  git commit -m "Apply $PATCHES_APPLIED patch(es) from ../$PATCH_DIR"
+else
+  echo
+  echo "==> No new patches applied. No commit needed."
+fi
+
 echo
-echo "==> All patches processed successfully (applied or skipped)."
+echo "==> Patch application complete."
 
