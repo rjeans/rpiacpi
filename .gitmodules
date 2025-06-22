@@ -10,3 +10,7 @@
 	path = firmware/edk2-non-osi
 	url = https://github.com/tianocore/edk2-non-osi.git
 	branch = master
+[submodule "flatcar/scripts"]
+	path = flatcar/scripts
+	url = https://github.com/flatcar/scripts.git
+	branch = flatcar-4284
