@@ -50,9 +50,8 @@ rpiacpi/
 ### 1. Clone and Initialize
 
 ```bash
-git clone https://github.com/rjeans/rpiacpi.git
+git clone https://github.com/rjeans/rpiacpi.git --recurse-submodules
 cd rpiacpi
-git submodule update --init --recursive
 ```
 
 ### 2. Build the Docker Image
