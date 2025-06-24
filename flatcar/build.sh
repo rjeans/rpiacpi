@@ -73,7 +73,7 @@ else
 fi
 
 
-./scripts/run_sdk_container -a=arm64 --enter bash -c '
+./run_sdk_container -a=arm64 --enter bash -c '
     set -e
     echo "Starting build_packages..."
     build_packages --board=arm64-usr
