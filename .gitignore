@@ -1,3 +1,4 @@
 .DS_Store
 flatcar/scripts/
+flatcar/build.log
 driver/build/
