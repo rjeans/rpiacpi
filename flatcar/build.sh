@@ -80,5 +80,5 @@ fi
     echo "Packages built successfully, now building image..."
     build_image --board=arm64-usr --replace
     echo "Build complete."
-'
+' 2>&1 | tee build.log
 
