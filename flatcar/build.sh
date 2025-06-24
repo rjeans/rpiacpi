@@ -55,3 +55,30 @@ done
 echo
 echo "==> Patch application complete."
 
+# Copy the patch file to the files directory
+FILES_DIR="sdk_container/src/third_party/coreos-overlay/sys-kernel/coreos-sources/files"
+SOURCE_PATCH="../../driver/patches/0001-Raspberry-Pi-PoE-ACPI-Drivers.patch"
+
+if [ ! -d "$FILES_DIR" ]; then
+  echo "==> Creating files directory: $FILES_DIR"
+  mkdir -p "$FILES_DIR"
+fi
+
+echo "==> Copying patch file to files directory"
+if cp "$SOURCE_PATCH" "$FILES_DIR/"; then
+  echo "==> File copied successfully."
+else
+  echo "ERROR: Failed to copy patch file to $FILES_DIR"
+  exit 1
+fi
+
+
+./scripts/run_sdk_container -a=arm64 --enter bash -c '
+    set -e
+    echo "Starting build_packages..."
+    build_packages --board=arm64-usr
+    echo "Packages built successfully, now building image..."
+    build_image --board=arm64-usr --replace
+    echo "Build complete."
+'
+
