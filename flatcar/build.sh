@@ -73,12 +73,13 @@ else
 fi
 
 
-./run_sdk_container -a arm64   2>&1 | tee build.log << 'EOF'
-    set -e
-    echo "Starting build_packages..."
-    ./trunk/src/scripts/build_packages --board=arm64-usr
-    echo "Packages built successfully, now building image..."
-    ./trunk/src/scripts/build_image --board=arm64-usr --replace
-    echo "Build complete."
+echo "==> Running SDK container and executing commands..."
+./run_sdk_container -a arm64 <<EOF 2>&1 | tee build.log
+echo "Starting build_packages..."
+./trunk/src/scripts/build_packages --board=arm64-usr
 
+echo "Packages built successfully, now building image..."
+./trunk/src/scripts/build_image --board=arm64-usr --replace
+
+echo "Build complete."
 EOF
