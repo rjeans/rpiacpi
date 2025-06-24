@@ -81,3 +81,4 @@ fi
     ./trunk/src/scripts/build_image --board=arm64-usr --replace
     echo "Build complete."
 
+EOF
